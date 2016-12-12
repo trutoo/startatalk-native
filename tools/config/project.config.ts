@@ -34,6 +34,7 @@ export class ProjectConfig extends SeedAdvancedConfig {
     this.SYSTEM_BUILDER_CONFIG.paths['google-maps'] = `node_modules/google-maps/lib/Google.js`;
 
     // Add packages (e.g. lodash)
+    // lodash is already added with the advanced seed - here for example only
     // let additionalPackages: ExtendPackages[] = [{
     //   name: 'lodash',
     //   path: `${this.APP_BASE}node_modules/lodash/lodash.js`,
