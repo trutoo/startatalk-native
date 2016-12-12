@@ -1,6 +1,7 @@
 {
-  "name": "angular-seed-advanced",
-  "version": "0.0.0",
+  "name": "com.trutoo.startatalk",
+  "version": "0.1.0",
+  "author": "Trutoo <erik.hughes@trutoo.com>",
   "description": "High-quality, modular starter (advanced seed) project for Angular 2 apps with statically typed build and AoT + NativeScript + Electron",
   "repository": {
     "url": "https://github.com/NathanWalker/angular-seed-advanced"
@@ -61,8 +62,10 @@
     "compodoc": "node_modules/.bin/compodoc -p src/client/tsconfig.json",
     "serve.compodoc": "node_modules/.bin/compodoc -s"
   },
-  "author": "Minko Gechev <mgechev>",
   "contributors": [
+    {
+      "name": "Minko Gechev <mgechev>"
+    },
     {
       "name": "Nathan Walker <NathanWalker>"
     }
@@ -175,6 +178,7 @@
     "angulartics2": "^1.4.3",
     "core-js": "^2.4.1",
     "es-module-loader": "^1.0.0",
+    "google-maps": "^3.2.1",
     "intl": "^1.2.5",
     "lodash": "^4.16.4",
     "minimatch": "^3.0.3",

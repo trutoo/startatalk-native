@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed-advanced",
+  "name": "startatalk-native",
   "main": "app.js",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "nativescript": {
-    "id": "com.yourdomain.appname",
+    "id": "com.trutoo.startatalk",
     "tns-ios": {
       "version": "2.4.0"
     },
@@ -31,6 +31,7 @@
     "es6-shim": "^0.35.0",
     "lodash": "^4.16.4",
     "nativescript-angular": "next",
+    "nativescript-google-maps-sdk": "^1.4.1",
     "nativescript-theme-core": "^1.0.0",
     "ng2-translate": "^4.0.0",
     "ngrx-store-freeze": "^0.1.0",

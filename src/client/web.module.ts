@@ -14,6 +14,7 @@ import { TranslateLoader } from 'ng2-translate';
 // app
 import { APP_COMPONENTS, AppComponent } from './app/components/index';
 import { routes } from './app/components/app.routes';
+import { GoogleMapsService } from './app/frameworks/startatalk/index';
 
 // feature modules
 import { CoreModule } from './app/frameworks/core/core.module';
@@ -23,6 +24,10 @@ import { MultilingualModule, translateFactory } from './app/frameworks/i18n/mult
 import { MultilingualEffects } from './app/frameworks/i18n/index';
 import { SampleModule } from './app/frameworks/sample/sample.module';
 import { NameListEffects } from './app/frameworks/sample/index';
+import { GoogleMaps } from './app/frameworks/startatalk/index';
+
+// web plugins
+var GoogleMapsLoader = require('google-maps');
 
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
@@ -33,7 +38,7 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
 }
 
 // sample config (extra)
-import { AppConfig } from './app/frameworks/sample/services/app-config';
+import { AppConfig } from './app/frameworks/startatalk/app-config';
 import { MultilingualService } from './app/frameworks/i18n/services/multilingual.service';
 // custom i18n language support
 MultilingualService.SUPPORTED_LANGUAGES = AppConfig.SUPPORTED_LANGUAGES;
@@ -43,7 +48,7 @@ let routerModule = RouterModule.forRoot(routes);
 if (String('<%= TARGET_DESKTOP %>') === 'true') {
   Config.PLATFORM_TARGET = Config.PLATFORMS.DESKTOP;
   // desktop (electron) must use hash
-  routerModule = RouterModule.forRoot(routes, {useHash: true});
+  routerModule = RouterModule.forRoot(routes, { useHash: true });
 }
 
 declare var window, console;
@@ -83,7 +88,13 @@ export function cons() {
     {
       provide: APP_BASE_HREF,
       useValue: '<%= APP_BASE %>'
-    }
+    },
+    {
+      provide: GoogleMaps, useValue: GoogleMapsLoader
+    },
+    {
+      provide: GoogleMapsService, useClass: GoogleMapsService
+    },
   ],
   bootstrap: [AppComponent]
 })
