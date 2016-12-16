@@ -1,36 +1,29 @@
 import { BaseComponent, Config } from '../../frameworks/core/index';
-//import { ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { GoogleMapsService } from '../../frameworks/startatalk/services/google-maps.service';
+import { ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { GoogleMapsService } from '../../frameworks/startatalk/index';
 
 @BaseComponent({
-    moduleId: module.id,
-    selector: 'sd-map',
-    templateUrl: 'map.component.html',
-    styleUrls: ['map.component.css'],
-    providers: [GoogleMapsService]
+  moduleId: module.id,
+  selector: 'sd-map',
+  templateUrl: 'map.component.html',
+  styleUrls: ['map.component.css']
 })
-export class MapComponent {
+export class MapComponent implements AfterViewInit {
 
-    //@ViewChild('MapView') mapView: ElementRef;
+  @ViewChild('MapView') mapView: ElementRef;
 
-    constructor(
-        private googleMaps: GoogleMapsService
-    ) {
-        if (Config.IS_WEB()) {
-            googleMaps.create();
-        } else if (Config.IS_MOBILE_NATIVE()) {
-            //const registerElement = require('nativescript-angular/element-registry');
-            //registerElement('MapView', () => require('nativescript-google-maps-sdk').MapView);
-            googleMaps.create();
-        }
-    }
+  constructor(
+    private googleMaps: GoogleMapsService
+  ) {
+  }
 
-    ngAfterViewInit() {
-        //console.log(this.mapView);
-    }
+  ngAfterViewInit() {
+    this.googleMaps.create(this.mapView).then(($event) => {
+      this.onMapReady($event);
+    });
+  }
 
-    onMapReady($event) {
-
-    }
-
+  onMapReady($event) {
+    // Todo
+  }
 }

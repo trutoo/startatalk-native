@@ -34,7 +34,7 @@ export class HomeComponent {
   readAbout() {
     // Try this in the {N} app
     // {N} can use these animation options
-    this.routerext.navigate(['/about'], {
+    this.routerext.navigate(['/map'], {
       transition: {
         duration: 1000,
         name: 'slideTop',

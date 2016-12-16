@@ -1,5 +1,5 @@
 // nativescript
-import { NativeScriptModule, platformNativeScriptDynamic } from 'nativescript-angular';
+import { NativeScriptModule, platformNativeScriptDynamic } from 'nativescript-angular/platform';
 
 /**
  * Config

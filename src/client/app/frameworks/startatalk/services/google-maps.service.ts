@@ -1,21 +1,32 @@
-import { Injectable, Inject, NgZone } from '@angular/core';
-import { GoogleMaps } from '../index';
-import { AppConfig } from '../app-config';
+import { Injectable, Inject, NgZone, ElementRef } from '@angular/core';
+import { GoogleMapsModule } from '../index';
+import { MapConfig } from '../index';
 
 @Injectable()
 export class GoogleMapsService {
 
-  private map: any;
+  private googleMaps: any;
 
   constructor(
-    @Inject(GoogleMaps) private googleMaps: any,
+    @Inject(GoogleMapsModule) private googleMapsModule: any,
   ) {
-    googleMaps.KEY = AppConfig.GOOGLE_MAPS_API_KEY;
-    googleMaps.LIBRARIES = AppConfig.GOOGLE_MAPS_LIBRARIES;
+    this.googleMapsModule.KEY = MapConfig.GOOGLE_MAPS_API_KEY;
+    this.googleMapsModule.LIBRARIES = MapConfig.GOOGLE_MAPS_LIBRARIES;
   }
 
-  create() {
-
+  create(mapView: ElementRef): Promise<any> {
+    console.log(this.googleMapsModule);
+    return new Promise((resolve: ($event: any) => void) => {
+      this.googleMapsModule.load((google: any) => {
+        // Loaded google maps sdk
+        this.googleMaps = google.maps;
+        const map = new this.googleMaps.Map(mapView.nativeElement, {
+          styles: MapConfig.GOOGLE_MAPS_STYLE,
+        });
+        // Match nativescript event
+        resolve({ eventName: 'mapReady', object: map, gMap: this.googleMaps });
+      });
+    });
   }
 
   destroy() {

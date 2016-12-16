@@ -24,10 +24,10 @@ import { MultilingualModule, translateFactory } from './app/frameworks/i18n/mult
 import { MultilingualEffects } from './app/frameworks/i18n/index';
 import { SampleModule } from './app/frameworks/sample/sample.module';
 import { NameListEffects } from './app/frameworks/sample/index';
-import { GoogleMaps } from './app/frameworks/startatalk/index';
+import { GoogleMapsModule } from './app/frameworks/startatalk/index';
 
 // web plugins
-var GoogleMapsLoader = require('google-maps');
+var googleMapsModule = require('google-maps');
 
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
@@ -38,7 +38,7 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
 }
 
 // sample config (extra)
-import { AppConfig } from './app/frameworks/startatalk/app-config';
+import { AppConfig } from './app/frameworks/startatalk/index';
 import { MultilingualService } from './app/frameworks/i18n/services/multilingual.service';
 // custom i18n language support
 MultilingualService.SUPPORTED_LANGUAGES = AppConfig.SUPPORTED_LANGUAGES;
@@ -90,7 +90,7 @@ export function cons() {
       useValue: '<%= APP_BASE %>'
     },
     {
-      provide: GoogleMaps, useValue: GoogleMapsLoader
+      provide: GoogleMapsModule, useValue: googleMapsModule
     },
     {
       provide: GoogleMapsService, useClass: GoogleMapsService

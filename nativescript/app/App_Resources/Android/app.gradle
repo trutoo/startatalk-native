@@ -3,18 +3,19 @@
 // Uncomment to add recyclerview-v7 dependency
 dependencies {
   //compile 'com.android.support:recyclerview-v7:+'
-  compile 'com.google.android.gms:play-services:10.0.1'
+  compile 'com.google.android.gms:play-services-maps:10.0.1'
+  //compile 'com.android.support:multidex:1.0.1'
 }
 
 android {  
   defaultConfig {
     generatedDensities = []
     applicationId 'com.trutoo.startatalk'
-    multiDexEnabled true
+    //multiDexEnabled true
   }  
   aaptOptions {  
     additionalParameters '--no-version-vectors'
   }
 }
 
-apply plugin: "com.google.gms.google-services"
+//apply plugin: "com.google.gms.google-services"

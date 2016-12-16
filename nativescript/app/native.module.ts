@@ -1,5 +1,9 @@
 // nativescript
-import { NativeScriptModule, NativeScriptFormsModule, NativeScriptHttpModule, NativeScriptRouterModule, RouterExtensions as TNSRouterExtensions } from 'nativescript-angular';
+import { NativeScriptModule } from 'nativescript-angular/platform';
+import { NativeScriptFormsModule } from 'nativescript-angular/forms';
+import { NativeScriptHttpModule } from "nativescript-angular/http";
+import { NativeScriptRouterModule } from 'nativescript-angular/router';
+import { RouterExtensions as TNSRouterExtensions } from 'nativescript-angular/router/router-extensions';
 // import { RouterExtensions as TNSRouterExtensions } from 'nativescript-angular/router';
 import { Http } from '@angular/http';
 
@@ -16,6 +20,7 @@ import { WindowService, ConsoleService, RouterExtensions } from './app/framework
 import { NSAppComponent } from './pages/app/app.component';
 import { AboutComponent } from './app/components/about/about.component';
 import { HomeComponent } from './app/components/home/home.component';
+import { MapComponent } from './app/components/map/map.component';
 import { routes } from './app/components/app.routes';
 import { GoogleMapsService } from './app/frameworks/startatalk/index';
 
@@ -27,7 +32,7 @@ import { MultilingualModule, translateFactory } from './app/frameworks/i18n/mult
 import { MultilingualEffects } from './app/frameworks/i18n/index';
 import { SampleModule } from './app/frameworks/sample/sample.module';
 import { NameListEffects } from './app/frameworks/sample/index';
-import { GoogleMaps } from './app/frameworks/startatalk/index';
+import { GoogleMapsModule } from './app/frameworks/startatalk/index';
 
 // {N} custom app specific
 import { WindowNative } from './shared/core/index';
@@ -35,7 +40,7 @@ import { NSGoogleMapsService } from './shared/core/index';
 import { NS_ANALYTICS_PROVIDERS } from './shared/nativescript/index';
 
 // nativescript plugins
-const googleMaps = require('nativescript-google-maps-sdk');
+const googleMapsModule = require('nativescript-google-maps-sdk');
 
 // intermediate component module
 // helps encapsulate custom native modules in with the components
@@ -55,7 +60,8 @@ const googleMaps = require('nativescript-google-maps-sdk');
   ],
   declarations: [
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    MapComponent
   ],
   exports: [
     NativeScriptModule,
@@ -92,7 +98,7 @@ export function cons() {
   providers: [
     NS_ANALYTICS_PROVIDERS,
     { provide: RouterExtensions, useClass: TNSRouterExtensions },
-    { provide: GoogleMaps, useFactory: () => { return googleMaps; } },
+    { provide: GoogleMapsModule, useFactory: () => { return googleMapsModule; } },
     { provide: GoogleMapsService, useClass: NSGoogleMapsService },
   ],
   bootstrap: [NSAppComponent]
