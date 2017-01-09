@@ -23,6 +23,7 @@ import { HomeComponent } from './app/components/home/home.component';
 import { MapComponent } from './app/components/map/map.component';
 import { routes } from './app/components/app.routes';
 import { GoogleMapsService } from './app/frameworks/startatalk/index';
+import { SVGService } from './app/frameworks/startatalk/index';
 
 // feature modules
 import { CoreModule } from './app/frameworks/core/core.module';
@@ -31,6 +32,7 @@ import { AnalyticsModule } from './app/frameworks/analytics/analytics.module';
 import { MultilingualModule, translateFactory } from './app/frameworks/i18n/multilingual.module';
 import { MultilingualEffects } from './app/frameworks/i18n/index';
 import { SampleModule } from './app/frameworks/sample/sample.module';
+import { StartatalkModule } from './app/frameworks/startatalk/startatalk.module';
 import { NameListEffects } from './app/frameworks/sample/index';
 import { GoogleMapsModule } from './app/frameworks/startatalk/index';
 
@@ -56,12 +58,13 @@ const googleMapsModule = require('nativescript-google-maps-sdk');
       deps: [Http],
       useFactory: (translateFactory)
     }]),
-    SampleModule
+    SampleModule,
+    StartatalkModule,
   ],
   declarations: [
     HomeComponent,
     AboutComponent,
-    MapComponent
+    MapComponent,
   ],
   exports: [
     NativeScriptModule,
@@ -69,7 +72,8 @@ const googleMapsModule = require('nativescript-google-maps-sdk');
     NativeScriptHttpModule,
     NativeScriptRouterModule,
     MultilingualModule,
-    SampleModule
+    SampleModule,
+    StartatalkModule,
   ]
 })
 class ComponentsModule { }
@@ -100,6 +104,7 @@ export function cons() {
     { provide: RouterExtensions, useClass: TNSRouterExtensions },
     { provide: GoogleMapsModule, useFactory: () => { return googleMapsModule; } },
     { provide: GoogleMapsService, useClass: NSGoogleMapsService },
+    { provide: SVGService, useClass: SVGService },
   ],
   bootstrap: [NSAppComponent]
 })

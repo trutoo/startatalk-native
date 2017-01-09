@@ -1,6 +1,6 @@
 import { Injectable, Inject, NgZone, ElementRef } from '@angular/core';
-import { GoogleMapsModule } from '../index';
-import { MapConfig } from '../index';
+import { GoogleMapsModule } from './index';
+import { MapConfig } from '../utils/index';
 
 @Injectable()
 export class GoogleMapsService {
@@ -10,17 +10,18 @@ export class GoogleMapsService {
   constructor(
     @Inject(GoogleMapsModule) private googleMapsModule: any,
   ) {
-    this.googleMapsModule.KEY = MapConfig.GOOGLE_MAPS_API_KEY;
-    this.googleMapsModule.LIBRARIES = MapConfig.GOOGLE_MAPS_LIBRARIES;
+    this.googleMapsModule.key = MapConfig.GOOGLE_MAPS_API_KEY;
+    this.googleMapsModule.libraries = MapConfig.GOOGLE_MAPS_LIBRARIES;
   }
 
   create(mapView: ElementRef): Promise<any> {
-    console.log(this.googleMapsModule);
     return new Promise((resolve: ($event: any) => void) => {
-      this.googleMapsModule.load((google: any) => {
+      this.googleMapsModule.load().then((google: any) => {
         // Loaded google maps sdk
         this.googleMaps = google.maps;
         const map = new this.googleMaps.Map(mapView.nativeElement, {
+          center: { lat: 59.334591, lng: 18.063240 },
+          zoom: 17,
           styles: MapConfig.GOOGLE_MAPS_STYLE,
         });
         // Match nativescript event

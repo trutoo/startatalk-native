@@ -1,0 +1,21 @@
+:host {
+  position: absolute;
+  top: 150px;
+  left: 50px;
+  padding: 2rem;
+  width: 25%;
+  min-width: 320px;
+  background: white;
+  border-radius: 3px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+
+  border: 5px solid;
+  border-image: linear-gradient(to bottom, red 20%, orange 20%, orange 40%, turquoise 40%, turquoise 60%, blue 60%, blue 80%, magenta 80%) 0 100%;
+  border-top: transparent;
+  border-right: transparent;
+  border-bottom: transparent;
+}
+
+header h3 {
+  margin-top: 0;
+}

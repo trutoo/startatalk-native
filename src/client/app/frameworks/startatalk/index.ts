@@ -1,10 +1,20 @@
-import { OpaqueToken } from '@angular/core';
-
-export const GoogleMapsModule: OpaqueToken = new OpaqueToken('google-maps');
+// components
+export * from './components/index';
 
 // services
-export * from './services/google-maps.service';
+export * from './services/index';
 
 // utils
-export * from './utils/app-config';
-export * from './utils/map-config';
+export * from './utils/index';
+
+// actions
+//export * from './actions/index';
+
+// effects
+//export * from './effects/index';
+
+// reducers
+//export * from './reducers/index';
+
+// state
+//export * from './states/index';

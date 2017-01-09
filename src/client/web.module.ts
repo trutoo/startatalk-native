@@ -15,6 +15,7 @@ import { TranslateLoader } from 'ng2-translate';
 import { APP_COMPONENTS, AppComponent } from './app/components/index';
 import { routes } from './app/components/app.routes';
 import { GoogleMapsService } from './app/frameworks/startatalk/index';
+import { SVGService } from './app/frameworks/startatalk/index';
 
 // feature modules
 import { CoreModule } from './app/frameworks/core/core.module';
@@ -23,11 +24,12 @@ import { AnalyticsModule } from './app/frameworks/analytics/analytics.module';
 import { MultilingualModule, translateFactory } from './app/frameworks/i18n/multilingual.module';
 import { MultilingualEffects } from './app/frameworks/i18n/index';
 import { SampleModule } from './app/frameworks/sample/sample.module';
+import { StartatalkModule } from './app/frameworks/startatalk/startatalk.module';
 import { NameListEffects } from './app/frameworks/sample/index';
 import { GoogleMapsModule } from './app/frameworks/startatalk/index';
 
 // web plugins
-var googleMapsModule = require('google-maps');
+var GoogleMapsLoader = require('google-maps-loader').default;
 
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
@@ -76,6 +78,7 @@ export function cons() {
       useFactory: (translateFactory)
     }]),
     SampleModule,
+    StartatalkModule,
     StoreModule.provideStore(AppReducer),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
     EffectsModule.run(MultilingualEffects),
@@ -90,10 +93,13 @@ export function cons() {
       useValue: '<%= APP_BASE %>'
     },
     {
-      provide: GoogleMapsModule, useValue: googleMapsModule
+      provide: GoogleMapsModule, useValue: GoogleMapsLoader.getInstance(),
     },
     {
-      provide: GoogleMapsService, useClass: GoogleMapsService
+      provide: GoogleMapsService, useClass: GoogleMapsService,
+    },
+    {
+      provide: SVGService, useClass: SVGService,
     },
   ],
   bootstrap: [AppComponent]
