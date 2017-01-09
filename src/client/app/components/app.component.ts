@@ -1,5 +1,5 @@
 // angular
-import { ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, OnInit } from '@angular/core';
 // any operators needed throughout your application
 import './operators';
 
@@ -17,7 +17,8 @@ import { BaseComponent, Config, LogService } from '../frameworks/core/index';
   changeDetection: ChangeDetectionStrategy.Default // Everything else uses OnPush
 })
 export class AppComponent {
-  constructor(public analytics: AnalyticsService, public logger: LogService) {
-    logger.debug(`Config env: ${Config.ENVIRONMENT().ENV}`);
+  constructor(public analytics: AnalyticsService,
+              public log: LogService) {
+    log.debug(`Config env: ${Config.ENVIRONMENT().ENV}`);
   }
 }

@@ -20,7 +20,7 @@ export class MultilingualEffects {
     .map(action => {
       let lang = action.payload;
       if (includes(map(MultilingualService.SUPPORTED_LANGUAGES, 'code'), lang)) {
-        let langChangedAction = new multilingual.LangChangedAction(lang); 
+        let langChangedAction = new multilingual.LangChangedAction(lang);
         // track analytics
         this.multilangService.track(langChangedAction.type, { label: langChangedAction.payload });
         // change state
