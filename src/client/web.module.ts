@@ -14,6 +14,7 @@ import { TranslateLoader } from 'ng2-translate';
 // app
 import { APP_COMPONENTS, AppComponent } from './app/components/index';
 import { routes } from './app/components/app.routes';
+import { FirebaseService } from './app/frameworks/startatalk/index';
 import { GoogleMapsService } from './app/frameworks/startatalk/index';
 import { SVGService } from './app/frameworks/startatalk/index';
 
@@ -26,10 +27,13 @@ import { MultilingualEffects } from './app/frameworks/i18n/index';
 import { SampleModule } from './app/frameworks/sample/sample.module';
 import { StartatalkModule } from './app/frameworks/startatalk/startatalk.module';
 import { NameListEffects } from './app/frameworks/sample/index';
-import { GoogleMapsModule } from './app/frameworks/startatalk/index';
+
+import { FirebaseToken } from './app/frameworks/startatalk/index';
+import { GoogleMapsToken } from './app/frameworks/startatalk/index';
 
 // web plugins
-var GoogleMapsLoader = require('google-maps-loader').default;
+const FirebasePlugin = require('firebase').firebase;
+const GoogleMapsPlugin = require('google-maps-loader').default;
 
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
@@ -93,7 +97,13 @@ export function cons() {
       useValue: '<%= APP_BASE %>'
     },
     {
-      provide: GoogleMapsModule, useValue: GoogleMapsLoader.getInstance(),
+      provide: FirebaseToken, useValue: FirebasePlugin,
+    },
+    {
+      provide: GoogleMapsToken, useValue: GoogleMapsPlugin.getInstance(),
+    },
+    {
+      provide: FirebaseService, useClass: FirebaseService,
     },
     {
       provide: GoogleMapsService, useClass: GoogleMapsService,

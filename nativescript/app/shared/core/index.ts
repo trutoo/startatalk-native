@@ -1,6 +1,5 @@
 // services
-export * from './services/window-native.service';
-export * from './services/google-maps.service';
+export * from './services/index';
 
 // utils
-export * from './utils/actionbar.util';
+export * from './utils/index';

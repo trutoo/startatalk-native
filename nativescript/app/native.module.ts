@@ -1,7 +1,7 @@
 // nativescript
 import { NativeScriptModule } from 'nativescript-angular/platform';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
-import { NativeScriptHttpModule } from "nativescript-angular/http";
+import { NativeScriptHttpModule } from 'nativescript-angular/http';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { RouterExtensions as TNSRouterExtensions } from 'nativescript-angular/router/router-extensions';
 // import { RouterExtensions as TNSRouterExtensions } from 'nativescript-angular/router';
@@ -22,6 +22,7 @@ import { AboutComponent } from './app/components/about/about.component';
 import { HomeComponent } from './app/components/home/home.component';
 import { MapComponent } from './app/components/map/map.component';
 import { routes } from './app/components/app.routes';
+import { FirebaseService } from './app/frameworks/startatalk/index';
 import { GoogleMapsService } from './app/frameworks/startatalk/index';
 import { SVGService } from './app/frameworks/startatalk/index';
 
@@ -34,15 +35,19 @@ import { MultilingualEffects } from './app/frameworks/i18n/index';
 import { SampleModule } from './app/frameworks/sample/sample.module';
 import { StartatalkModule } from './app/frameworks/startatalk/startatalk.module';
 import { NameListEffects } from './app/frameworks/sample/index';
-import { GoogleMapsModule } from './app/frameworks/startatalk/index';
+
+import { FirebaseToken } from './app/frameworks/startatalk/index';
+import { GoogleMapsToken } from './app/frameworks/startatalk/index';
 
 // {N} custom app specific
 import { WindowNative } from './shared/core/index';
+import { NSFirebaseService } from './shared/core/index';
 import { NSGoogleMapsService } from './shared/core/index';
 import { NS_ANALYTICS_PROVIDERS } from './shared/nativescript/index';
 
 // nativescript plugins
-const googleMapsModule = require('nativescript-google-maps-sdk');
+const FirebasePlugin = require('nativescript-plugin-firebase');
+const GoogleMapsPlugin = require('nativescript-google-maps-sdk');
 
 // intermediate component module
 // helps encapsulate custom native modules in with the components
@@ -102,7 +107,9 @@ export function cons() {
   providers: [
     NS_ANALYTICS_PROVIDERS,
     { provide: RouterExtensions, useClass: TNSRouterExtensions },
-    { provide: GoogleMapsModule, useFactory: () => { return googleMapsModule; } },
+    { provide: FirebaseToken, useFactory: () => { return FirebasePlugin; } },
+    { provide: GoogleMapsToken, useFactory: () => { return GoogleMapsPlugin; } },
+    { provide: FirebaseService, useClass: NSFirebaseService },
     { provide: GoogleMapsService, useClass: NSGoogleMapsService },
     { provide: SVGService, useClass: SVGService },
   ],

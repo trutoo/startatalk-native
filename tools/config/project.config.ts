@@ -30,6 +30,9 @@ export class ProjectConfig extends SeedAdvancedConfig {
       // {src: `${this.CSS_SRC}/path-to-lib/test-lib.css`, inject: true, vendor: false},
     ];
 
+    this.SYSTEM_CONFIG.paths['firebase'] = `${this.APP_BASE}node_modules/firebase/firebase`;
+    this.SYSTEM_BUILDER_CONFIG.paths['firebase'] = `node_modules/firebase/firebase.js`;
+
     this.SYSTEM_CONFIG.paths['google-maps-loader'] = `${this.APP_BASE}node_modules/google-maps-loader/dist/google-maps-loader`;
     this.SYSTEM_BUILDER_CONFIG.paths['google-maps-loader'] = `node_modules/google-maps-loader/dist/google-maps-loader.js`;
 

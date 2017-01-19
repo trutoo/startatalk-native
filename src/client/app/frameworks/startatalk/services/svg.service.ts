@@ -1,5 +1,5 @@
 import { Injectable, Inject, NgZone, ElementRef } from '@angular/core';
-import { GoogleMapsModule } from './index';
+import { GoogleMapsToken } from './index';
 import { MapConfig } from '../utils/index';
 import * as SVG from 'svg.js';
 //import SVG from 'svg.js';

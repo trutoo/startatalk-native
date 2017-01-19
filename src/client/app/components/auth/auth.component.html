@@ -1,8 +1,11 @@
-<input type="email" placeholder="john.doe@email.com" />
-<input type="password" placeholder="password" />
+<input type="email" placeholder="Email" />
+<input type="password" placeholder="Password" />
+<button type="submit">Continue</button>
 
-<h3>Authenticate using email or social media</h3>
+<fieldset class="divider">
+  <legend class="label">Or</legend>
+</fieldset>
 
-<button class="facebook">Continue with Facebook</button>
+<button class="facebook" (click)="facebookLogin()">Continue with Facebook</button>
 <button class="twitter">Continue with Twitter</button>
 <button class="google">Continue with Google</button>

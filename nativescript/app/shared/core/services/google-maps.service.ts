@@ -1,5 +1,5 @@
 import { Injectable, Inject, NgZone, ElementRef } from '@angular/core';
-import { GoogleMapsModule } from '../../../app/frameworks/startatalk/index';
+import { GoogleMapsToken } from '../../../app/frameworks/startatalk/index';
 import { MapConfig } from '../../../app/frameworks/startatalk/index';
 import { registerElement } from 'nativescript-angular/element-registry';
 
@@ -9,7 +9,7 @@ export class NSGoogleMapsService {
   private googleMaps: any;
 
   constructor(
-    @Inject(GoogleMapsModule) private googleMapsModule: any,
+    @Inject(GoogleMapsToken) private googleMapsToken: any,
   ) {
     registerElement('MapView', () => this.googleMaps.MapView);
   }
