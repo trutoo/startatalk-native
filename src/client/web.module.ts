@@ -19,14 +19,14 @@ import { GoogleMapsService } from './app/frameworks/startatalk/index';
 import { SVGService } from './app/frameworks/startatalk/index';
 
 // feature modules
-import { CoreModule } from './app/frameworks/core/core.module';
-import { AppReducer } from './app/frameworks/ngrx/index';
-import { AnalyticsModule } from './app/frameworks/analytics/analytics.module';
-import { MultilingualModule, translateFactory } from './app/frameworks/i18n/multilingual.module';
-import { MultilingualEffects } from './app/frameworks/i18n/index';
-import { SampleModule } from './app/frameworks/sample/sample.module';
+import { CoreModule } from './app/shared/core/core.module';
+import { AppReducer } from './app/shared/ngrx/index';
+import { AnalyticsModule } from './app/shared/analytics/analytics.module';
+import { MultilingualModule, translateLoaderFactory } from './app/shared/i18n/multilingual.module';
+import { MultilingualEffects } from './app/shared/i18n/index';
+import { SampleModule } from './app/shared/sample/sample.module';
 import { StartatalkModule } from './app/frameworks/startatalk/startatalk.module';
-import { NameListEffects } from './app/frameworks/sample/index';
+import { NameListEffects } from './app/shared/sample/index';
 
 import { FirebaseToken } from './app/frameworks/startatalk/index';
 import { GoogleMapsToken } from './app/frameworks/startatalk/index';
@@ -36,7 +36,7 @@ const FirebasePlugin = require('firebase').firebase;
 const GoogleMapsPlugin = require('google-maps-loader').default;
 
 // config
-import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
+import { Config, WindowService, ConsoleService } from './app/shared/core/index';
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
 if (String('<%= BUILD_TYPE %>') === 'dev') {
   // only output console logging in dev mode
@@ -44,8 +44,8 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
 }
 
 // sample config (extra)
-import { AppConfig } from './app/frameworks/startatalk/index';
-import { MultilingualService } from './app/frameworks/i18n/services/multilingual.service';
+import { AppConfig } from './app/shared/sample/services/app-config';
+import { MultilingualService } from './app/shared/i18n/services/multilingual.service';
 // custom i18n language support
 MultilingualService.SUPPORTED_LANGUAGES = AppConfig.SUPPORTED_LANGUAGES;
 
@@ -79,7 +79,7 @@ export function cons() {
     MultilingualModule.forRoot([{
       provide: TranslateLoader,
       deps: [Http],
-      useFactory: (translateFactory)
+      useFactory: (translateLoaderFactory)
     }]),
     SampleModule,
     StartatalkModule,
