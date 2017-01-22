@@ -4,8 +4,7 @@
     "**/nativescript/platforms": true,
     "src/client/**/*.js": true,
     "src/client/**/*.js.map": true,
-    "nativescript/app/**/*.js": true,
-    "nativescript/app/**/*.js.map": true,
+    "nativescript/src/app/**": true,
     "ChromeDebugger-UserData/**/*": true
   },
   "search.exclude": {
@@ -15,8 +14,7 @@
     "**/nativescript/platforms": true,
     "src/client/**/*.js": true,
     "src/client/**/*.js.map": true,
-    "nativescript/app/**/*.js": true,
-    "nativescript/app/**/*.js.map": true,
+    "nativescript/src/app/**": true,
     "ChromeDebugger-UserData/**/*": true
   },
   "typescript.tsdk": "node_modules/typescript/lib"
