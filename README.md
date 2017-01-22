@@ -6,7 +6,7 @@
 [![Dependency Status](https://david-dm.org/NathanWalker/angular-seed-advanced.svg)](https://david-dm.org/NathanWalker/angular-seed-advanced)
 [![devDependency Status](https://david-dm.org/NathanWalker/angular-seed-advanced/dev-status.svg)](https://david-dm.org/NathanWalker/angular-seed-advanced#info=devDependencies)
 
-This is an **advanced** seed project for Angular apps based on [Minko Gechev's](https://github.com/mgechev)[angular-seed](https://github.com/mgechev/angular-seed) that expands on all of its great features to include core support for:
+This is an **advanced** seed project for Angular apps based on [Minko Gechev's](https://github.com/mgechev) [angular-seed](https://github.com/mgechev/angular-seed) that expands on all of its great features to include core support for:
 
 #### Integration with:
 - [ngrx/store](https://github.com/ngrx/store) RxJS powered state management, inspired by **Redux**
@@ -34,15 +34,20 @@ This is an **advanced** seed project for Angular apps based on [Minko Gechev's](
 
 - [Prerequisites](#prerequisites)
 - [How to start](#how-to-start)
-- [How to start with AoT compilation](#how-to-start-with-aot-compilation)
-- [Mobile App](#mobile-app)
-- [Desktop App](#desktop-app)
+- [How to start with AoT](#how-to-start-with-aot)
+- [Mobile app](#mobile-app)
+- [Desktop app](#desktop-app)
 - [Running tests](#running-tests)
-- [How-Tos](#how-tos)
-- [Web Configuration Options](#web-configuration-options)
-- [General Best Practice Guide to Sharing Code](#general-best-practice-guide-to-sharing-code)
-- [Integration Guides](https://github.com/NathanWalker/angular-seed-advanced/wiki)
+- [Web configuration options](#web-configuration-options)
+- [Code organization overview](#code-organization-overview)
+- [How-tos](#how-tos)
+- [General best practice guide to sharing code](#general-best-practice-guide-to-sharing-code)
+- [Integration guides](https://github.com/NathanWalker/angular-seed-advanced/wiki)
 - [How best to use for your project](#how-best-to-use-for-your-project)
+- [Dockerization](#dockerization)
+  + [How to build and start the dockerized version of the application](#how-to-build-and-start-the-dockerized-version-of-the-application)
+  + [Development build and deployment](#development-build-and-deployment)
+  + [Production build and deployment](#production-build-and-deployment)
 - [Contributing](#contributing)
 - [License](#license)
   
@@ -89,18 +94,19 @@ $ npm run build.dev
 $ npm run build.prod
 ```
 
-## How to start with AoT compilation
+## How to start with AoT
 
 **Note** that AoT compilation requires **node v6.5.0 or higher** and **npm 3.10.3 or higher**.
 
 In order to start the seed with AoT use:
 
 ```bash
-# prod build with AoT compilation
+# prod build with AoT compilation, will output the production application in `dist/prod`
+# the produced code can be deployed (rsynced) to a remote server
 $ npm run build.prod.exp
 ```
 
-## Mobile App
+## Mobile app
 
 The mobile app is provided via [NativeScript](https://www.nativescript.org/), an open source framework for building truly native mobile apps.
 
@@ -147,7 +153,7 @@ Android:   npm run build.android
 iOS:       npm run build.ios
 ```
 
-## Desktop App
+## Desktop app
 
 The desktop app is provided via [Electron](http://electron.atom.io/), cross platform desktop apps
 with JavaScript, HTML, and CSS.
@@ -208,7 +214,7 @@ $ npm run e2e.live
 ```
 You can learn more about [Protractor Interactive Mode here](https://github.com/angular/protractor/blob/master/docs/debugging.md#testing-out-protractor-interactively)
 
-## Web Configuration Options
+## Web configuration options
 
 Default application server configuration
 
@@ -241,7 +247,39 @@ Currently the `ENV_NAME`s are `dev`, `prod`, `staging`, but you can simply add a
 
 A documentation of the provided tools can be found in [tools/README.md](tools/README.md).
 
-## How-Tos
+## Code organization overview
+
+- `nativescript`: Root of this directory is reserved for mobile app.
+  - `src`: mobile app src.
+    - `app`: Symbolic link of shared code from web app.
+    - `App_Resources`: iOS and Android platform specific config files and images.
+    - `mobile`: Mobile specific services, etc. Build out mobile specific services here as well as overrides for web services that need to be provided for in the mobile app. **Safe to import {N} modules here.**
+    - [native.module.ts](https://github.com/NathanWalker/angular-seed-advanced/blob/master/nativescript/src/native.module.ts): Root module for the mobile app provided by NativeScript. Override/provide native mobile implementations of services here.
+- `src/client`: Root of this directory is reserved for web and desktop.
+  - `app`: All the code in this directory is shared with the mobile app via a symbolic link.
+    - `components`: Reserved for primary routing components. Since each app usually has it's own set of unique routes, you can provide the app's primary routing components here.
+    - `shared`: Shared code across all platforms. Reusable sub components, services, utilities, etc.
+      - `analytics`: Provides services for analytics. Out of the box, [Segment](https://segment.com/) is configured.
+      - `core`: Low level services. Foundational layer.
+      - `electron`: Services specific to electron integration. Could be refactored out in the future since this is not needed to be shared with the mobile app.
+      - `i18n`: Various localization features.
+      - `ngrx`: Central ngrx coordination. Brings together state from any other feature modules etc. to setup the initial app state.
+      - `sample`: Just a sample module pre-configured with a scalable ngrx setup.
+      - `test`: Testing utilities. This could be refactored into a different location in the future.
+  - `assets`: Various locale files, images and other assets the app needs to load.
+  - `css`: List of the main style files to be created via the SASS compilation (enabled by default).
+  - `scss`: Partial SASS files - reserved for things like `_variables.scss` and other imported partials for styling.
+  - [index.html](https://github.com/NathanWalker/angular-seed-advanced/blob/master/src/client/index.html): The index file for the web and desktop app (which share the same setup).
+  - [main.desktop.ts](https://github.com/NathanWalker/angular-seed-advanced/blob/master/src/client/main.desktop.ts): The  file used by Electron to start the desktop app.
+  - [main.web.prod.ts](https://github.com/NathanWalker/angular-seed-advanced/blob/master/src/client/main.web.prod.ts): Bootstraps the AoT web build. *Generally won't modify anything here*
+  - [main.web.ts](https://github.com/NathanWalker/angular-seed-advanced/blob/master/src/client/main.web.ts): Bootstraps the development web build. *Generally won't modify anything here*
+  - [package.json](https://github.com/NathanWalker/angular-seed-advanced/blob/master/src/client/package.json): Used by Electron to start the desktop app.
+  - [system-config.ts](https://github.com/NathanWalker/angular-seed-advanced/blob/master/src/client/system-config.ts): This loads the SystemJS configuration defined [here](https://github.com/NathanWalker/angular-seed-advanced/blob/master/tools/config/seed.config.ts#L397) and extended in your own app's customized [project.config.ts](https://github.com/NathanWalker/angular-seed-advanced/blob/master/tools/config/project.config.ts).
+  - [tsconfig.json](https://github.com/NathanWalker/angular-seed-advanced/blob/master/src/client/tsconfig.json): Used by [compodoc](https://compodoc.github.io/compodoc/) - The missing documentation tool for your Angular application - to generate api docs for your code.
+  - [web.module.ts](https://github.com/NathanWalker/angular-seed-advanced/blob/master/src/client/web.module.ts): The root module for the web and desktop app.
+- `src/e2e`: Integration/end-to-end tests for the web app.
+
+## How-tos
 
 ### i18n
 
@@ -253,7 +291,7 @@ A documentation of the provided tools can be found in [tools/README.md](tools/RE
   - `src/client/app/shared/i18n/components/lang-switcher.component.spec.ts`
     - fix test
 
-## General Best Practice Guide to Sharing Code 
+## General best practice guide to sharing code
 
 There’s actually only a few things to keep in mind when sharing code between web/mobile. The seed does take care of quite a few of those things but here’s a brief list:
 
@@ -316,6 +354,40 @@ There are some cases where you may want to use `useValue` vs. `useClass`, and ot
 You can read more about [syncing a fork here](https://help.github.com/articles/syncing-a-fork/).
 
 If you have any suggestions to this workflow, please post [here](https://github.com/NathanWalker/angular-seed-advanced/issues).
+
+# Dockerization
+
+The application provides full Docker support. You can use it for both development as well as production builds and deployments.
+
+## How to build and start the dockerized version of the application 
+
+The Dockerization infrastructure is described in the `docker-compose.yml` (respectively `docker-compose.production.yml`.
+The application consists of two containers:
+- `angular-seed` - In development mode, this container serves the angular app. In production mode it builds the angular app, with the build artifacts being served by the Nginx container
+- `angular-seed-nginx` - This container is used only production mode. It serves the built angular app with Nginx.
+
+## Development build and deployment
+
+Run the following:
+
+```bash
+$ docker-compose build
+$ docker-compose up -d
+```
+
+Now open your browser at http://localhost:5555
+
+## Production build and deployment
+
+Run the following:
+
+```bash
+$ docker-compose -f docker-compose.production.yml build
+$ docker-compose -f docker-compose.production.yml up angular-seed   # Wait until this container has finished building, as the nginx container is dependent on the production build artifacts
+$ docker-compose -f docker-compose.production.yml up -d angular-seed-nginx  # Start the nginx container in detached mode
+```
+
+Now open your browser at http://localhost:5555
 
 ## Contributing
 
