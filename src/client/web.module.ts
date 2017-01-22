@@ -14,9 +14,13 @@ import { TranslateLoader } from 'ng2-translate';
 // app
 import { APP_COMPONENTS, AppComponent } from './app/components/index';
 import { routes } from './app/components/app.routes';
-import { FirebaseService } from './app/frameworks/startatalk/index';
-import { GoogleMapsService } from './app/frameworks/startatalk/index';
-import { SVGService } from './app/frameworks/startatalk/index';
+import {
+  FirebaseToken,
+  FirebaseService,
+  GoogleMapsToken,
+  GoogleMapsService,
+  SVGService
+} from './app/shared/startatalk/index';
 
 // feature modules
 import { CoreModule } from './app/shared/core/core.module';
@@ -25,11 +29,8 @@ import { AnalyticsModule } from './app/shared/analytics/analytics.module';
 import { MultilingualModule, translateLoaderFactory } from './app/shared/i18n/multilingual.module';
 import { MultilingualEffects } from './app/shared/i18n/index';
 import { SampleModule } from './app/shared/sample/sample.module';
-import { StartatalkModule } from './app/frameworks/startatalk/startatalk.module';
 import { NameListEffects } from './app/shared/sample/index';
-
-import { FirebaseToken } from './app/frameworks/startatalk/index';
-import { GoogleMapsToken } from './app/frameworks/startatalk/index';
+import { StartatalkModule } from './app/shared/startatalk/startatalk.module';
 
 // web plugins
 const FirebasePlugin = require('firebase').firebase;

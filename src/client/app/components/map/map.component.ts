@@ -1,9 +1,10 @@
-import { BaseComponent, Config } from '../../frameworks/core/index';
+import { Component } from '@angular/core';
+import { Config } from '../../shared/core/index';
 import { ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { GoogleMapsService } from '../../frameworks/startatalk/index';
-import { SVGService } from '../../frameworks/startatalk/index';
+import { GoogleMapsService } from '../../shared/startatalk/index';
+import { SVGService } from '../../shared/startatalk/index';
 
-@BaseComponent({
+@Component({
   moduleId: module.id,
   selector: 'sd-map',
   templateUrl: 'map.component.html',

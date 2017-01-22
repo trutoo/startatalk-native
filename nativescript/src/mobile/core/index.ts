@@ -1,6 +1,5 @@
 // services
-export * from './services/window-native.service';
-export * from './services/ns-app.service';
+export * from './services/index';
 
 // utils
 export * from './utils/index';

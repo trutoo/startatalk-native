@@ -1,8 +1,9 @@
-import { BaseComponent, Config } from '../../frameworks/core/index';
+import { Component } from '@angular/core';
+import { Config } from '../../shared/core/index';
 import { ElementRef, ViewChild } from '@angular/core';
-import { FirebaseService } from '../../frameworks/startatalk/index';
+import { FirebaseService } from '../../shared/startatalk/index';
 
-@BaseComponent({
+@Component({
   moduleId: module.id,
   selector: 'sd-auth',
   templateUrl: 'auth.component.html',

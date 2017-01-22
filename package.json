@@ -187,7 +187,7 @@
     "core-js": "^2.4.1",
     "es-module-loader": "^1.0.0",
     "firebase": "^3.6.4",
-    "google-maps-loader": "git+https://github.com/trutoo/Js-GoogleMapsLoader.git",
+    "google-maps-loader": "git+https://github.com/trutoo/google-maps-loader",
     "intl": "^1.2.5",
     "lodash": "^4.17.4",
     "minimatch": "^3.0.3",

@@ -18,6 +18,13 @@ import {
   RouterExtensions,
   AppService
 } from './app/shared/core/index';
+import {
+  FirebaseToken,
+  FirebaseService,
+  GoogleMapsToken,
+  GoogleMapsService,
+  SVGService
+} from './app/shared/startatalk/index';
 import { AppComponent } from './app/components/app.component';
 import { routes } from './app/components/app.routes';
 
@@ -29,8 +36,17 @@ import { NameListEffects } from './app/shared/sample/index';
 import { ComponentsModule, cons } from './components.module';
 
 // {N} custom app specific
-import { WindowNative, NSAppService } from './mobile/core/index';
+import {
+  WindowNative,
+  NSAppService,
+  NSFirebaseService,
+  NSGoogleMapsService
+} from './mobile/core/index';
 import { NS_ANALYTICS_PROVIDERS } from './mobile/analytics/index';
+
+// nativescript plugins
+const FirebasePlugin = require('nativescript-plugin-firebase');
+const GoogleMapsPlugin = require('nativescript-google-maps-sdk');
 
 /**
  * Config
@@ -69,6 +85,11 @@ MultilingualService.SUPPORTED_LANGUAGES = AppConfig.SUPPORTED_LANGUAGES;
     NS_ANALYTICS_PROVIDERS,
     { provide: RouterExtensions, useClass: TNSRouterExtensions },
     { provide: AppService, useClass: NSAppService },
+    { provide: FirebaseToken, useFactory: () => { return FirebasePlugin; } },
+    { provide: GoogleMapsToken, useFactory: () => { return GoogleMapsPlugin; } },
+    { provide: FirebaseService, useClass: NSFirebaseService },
+    { provide: GoogleMapsService, useClass: NSGoogleMapsService },
+    { provide: SVGService, useClass: SVGService },
   ],
   schemas: [
     NO_ERRORS_SCHEMA,

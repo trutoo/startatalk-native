@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BaseComponent } from '../../../core/index';
 
-@BaseComponent({
+@Component({
   moduleId: module.id,
   selector: 'sd-details',
   templateUrl: 'details.component.html',
