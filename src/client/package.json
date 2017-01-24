@@ -1,5 +1,5 @@
 {
-  "name": "startatalk-native",
+  "name": "com.trutoo.startatalk",
   "main": "main.desktop.js",
   "version": "0.1.0"
 }

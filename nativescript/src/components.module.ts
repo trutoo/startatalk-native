@@ -17,6 +17,8 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
 import { AppComponent } from './app/components/app.component';
 import { AboutComponent } from './app/components/about/about.component';
 import { HomeComponent } from './app/components/home/home.component';
+import { AuthComponent } from './app/components/auth/auth.component';
+import { MapComponent } from './app/components/map/map.component';
 import { routes } from './app/components/app.routes';
 
 // feature modules
@@ -24,6 +26,7 @@ import { CoreModule } from './app/shared/core/core.module';
 import { AnalyticsModule } from './app/shared/analytics/analytics.module';
 import { MultilingualModule, translateLoaderFactory } from './app/shared/i18n/multilingual.module';
 import { SampleModule } from './app/shared/sample/sample.module';
+import { StartatalkModule } from './app/shared/startatalk/startatalk.module';
 
 // intermediate component module
 // helps encapsulate custom native modules in with the components
@@ -41,12 +44,15 @@ import { SampleModule } from './app/shared/sample/sample.module';
       deps: [Http],
       useFactory: (translateLoaderFactory)
     }]),
-    SampleModule
+    SampleModule,
+    StartatalkModule,
   ],
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    AuthComponent,
+    MapComponent,
   ],
   schemas: [
     NO_ERRORS_SCHEMA,
@@ -61,7 +67,8 @@ import { SampleModule } from './app/shared/sample/sample.module';
     AppComponent,
     AnalyticsModule,
     CoreModule,
-    SampleModule
+    SampleModule,
+    StartatalkModule,
   ]
 })
 export class ComponentsModule { }

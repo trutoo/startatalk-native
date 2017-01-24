@@ -15,6 +15,10 @@ import { TEST_MULTILINGUAL_RESET } from '../testing/index';
 
 const SUPPORTED_LANGUAGES: Array<ILang> = [
   { code: 'en', title: 'English' },
+  { code: 'es', title: 'Spanish' },
+  { code: 'fr', title: 'French' },
+  { code: 'ru', title: 'Russian' },
+  { code: 'bg', title: 'Bulgarian' }
 ];
 
 // test module configuration for each test
@@ -70,6 +74,10 @@ export function main() {
               let appDOMEl = fixture.debugElement.children[0].nativeElement;
               t.e(appDOMEl.querySelectorAll('form > select option').length).toBe(5);
               t.e(appDOMEl.querySelectorAll('form > select option')[0].value).toBe('en');
+              t.e(appDOMEl.querySelectorAll('form > select option')[1].value).toBe('es');
+              t.e(appDOMEl.querySelectorAll('form > select option')[2].value).toBe('fr');
+              t.e(appDOMEl.querySelectorAll('form > select option')[3].value).toBe('ru');
+              t.e(appDOMEl.querySelectorAll('form > select option')[4].value).toBe('bg');
             });
         }));
     });
@@ -80,4 +88,4 @@ export function main() {
   selector: 'test-cmp',
   template: '<lang-switcher></lang-switcher>'
 })
-class TestComponent { }
+class TestComponent {}

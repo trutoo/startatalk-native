@@ -3,8 +3,8 @@
   "files.exclude": {
     "**/nativescript/platforms": true,
     "src/client/**/*.js": true,
-    "src/client/**/*.js.map": true,
-    "nativescript/src/app/**": true,
+    "nativescript/app": true,
+    "nativescript/src/**/*.js": true,
     "ChromeDebugger-UserData/**/*": true
   },
   "search.exclude": {
@@ -13,8 +13,8 @@
     "**/dist": true,
     "**/nativescript/platforms": true,
     "src/client/**/*.js": true,
-    "src/client/**/*.js.map": true,
-    "nativescript/src/app/**": true,
+    "nativescript/app": true,
+    "nativescript/src/**/*.js": true,
     "ChromeDebugger-UserData/**/*": true
   },
   "typescript.tsdk": "node_modules/typescript/lib"

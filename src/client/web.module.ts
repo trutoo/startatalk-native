@@ -93,25 +93,12 @@ export function cons() {
     APP_COMPONENTS
   ],
   providers: [
-    {
-      provide: APP_BASE_HREF,
-      useValue: '<%= APP_BASE %>'
-    },
-    {
-      provide: FirebaseToken, useValue: FirebasePlugin,
-    },
-    {
-      provide: GoogleMapsToken, useValue: GoogleMapsPlugin.getInstance(),
-    },
-    {
-      provide: FirebaseService, useClass: FirebaseService,
-    },
-    {
-      provide: GoogleMapsService, useClass: GoogleMapsService,
-    },
-    {
-      provide: SVGService, useClass: SVGService,
-    },
+    { provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>' },
+    { provide: FirebaseToken, useValue: FirebasePlugin, },
+    { provide: GoogleMapsToken, useValue: GoogleMapsPlugin.getInstance(), },
+    { provide: FirebaseService, useClass: FirebaseService, },
+    { provide: GoogleMapsService, useClass: GoogleMapsService, },
+    { provide: SVGService, useClass: SVGService, },
   ],
   bootstrap: [AppComponent]
 })

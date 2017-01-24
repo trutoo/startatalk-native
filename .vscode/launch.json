@@ -1,18 +1,6 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "Launch and Sync Android App",
-      "type": "nativescript",
-      "platform": "android",
-      "request": "launch",
-      "appRoot": "${workspaceRoot}/nativescript",
-      "sourceMaps": true,
-      "diagnosticLogging": false,
-      "tnsArgs": [
-        "--disable-npm-install"
-      ]
-    },
+	"version": "0.2.0",
+	"configurations": [
     {
       "name": "Launch localhost with sourcemaps",
       "type": "chrome",
@@ -37,7 +25,7 @@
       // next line is very important
       "runtimeExecutable": "${env.APPDATA}/npm/node_modules/electron-prebuilt/dist/electron.exe",
       "runtimeArgs": [],
-      "env": {},
+      "env": { },
       "sourceMaps": true
     },
     {
