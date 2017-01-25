@@ -42,7 +42,7 @@ export class SeedAdvancedConfig extends SeedConfig {
     if (this.TARGET_MOBILE_HYBRID) {
       // Perhaps Ionic or Cordova
       // This is not implemented in the seed but here to show you way forward if you wanted to add
-      bootstrap   = 'main.mobile.hybrid';
+      bootstrap = 'main.mobile.hybrid';
     }
 
     if (argv['analytics']) {
@@ -127,8 +127,8 @@ export class SeedAdvancedConfig extends SeedConfig {
         path: `${this.APP_BASE}node_modules/ngrx-store-freeze/dist/index.js`
       },
       {
-        name: 'deep-freeze',
-        path: `${this.APP_BASE}node_modules/deep-freeze/index.js`
+        name: 'deep-freeze-strict',
+        path: `${this.APP_BASE}node_modules/deep-freeze-strict/index.js`
       }
     ];
 

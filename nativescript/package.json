@@ -12,8 +12,8 @@
         }
     },
     "scripts": {
-        "preinstall": "mkdir -p app",
-        "clean": "rm -rf platforms node_modules lib hooks app && mkdir -p app",
+        "preinstall": "mkdirp app",
+        "clean": "rimraf platforms node_modules lib hooks app && mkdirp app",
         "clean-android": "tns clean-app android",
         "clean-ios": "tns clean-app ios",
         "prewebpack-android": "npm run clean-android",

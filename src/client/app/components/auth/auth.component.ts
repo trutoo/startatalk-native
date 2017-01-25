@@ -7,8 +7,7 @@ import { FirebaseService } from '../../shared/startatalk/index';
   moduleId: module.id,
   selector: 'sd-auth',
   templateUrl: 'auth.component.html',
-  styleUrls: ['auth.component.css'],
-  providers: [FirebaseService]
+  styleUrls: ['auth.component.css']
 })
 export class AuthComponent {
 
