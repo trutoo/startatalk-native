@@ -12,10 +12,10 @@ import { FirebaseService } from '../../shared/startatalk/index';
 export class AuthComponent {
 
   static TYPE = {
-    EMAIL: 0,
-    FACEBOOK: 1,
-    GOOGLE: 2,
-    TWITTER: 3,
+    EMAIL: 'email',
+    FACEBOOK: 'facebook',
+    GOOGLE: 'google',
+    TWITTER: 'twitter',
   };
 
   constructor(
@@ -23,11 +23,15 @@ export class AuthComponent {
   ) {
   }
 
-  authenticate(type: number) {
+  authenticate(type: string) {
     let provider;
     switch (type) {
       case AuthComponent.TYPE.FACEBOOK:
         this.firebaseService.facebookAuth();
+        break;
+      case AuthComponent.TYPE.GOOGLE:
+        this.firebaseService.googleAuth();
+        break;
     }
   }
 }

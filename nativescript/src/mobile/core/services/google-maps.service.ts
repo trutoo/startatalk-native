@@ -1,6 +1,5 @@
 import { Injectable, Inject, NgZone, ElementRef } from '@angular/core';
-import { GoogleMapsToken } from '../../../app/frameworks/startatalk/index';
-import { MapConfig } from '../../../app/frameworks/startatalk/index';
+import { GoogleMapsToken, MapConfig } from '../../../app/shared/startatalk/index';
 import { registerElement } from 'nativescript-angular/element-registry';
 
 @Injectable()

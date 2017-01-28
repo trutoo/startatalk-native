@@ -1,5 +1,5 @@
 import { Injectable, Inject, NgZone } from '@angular/core';
-import { FirebaseToken } from '../../../app/frameworks/startatalk/index';
+import { FirebaseToken } from '../../../app/shared/startatalk/index';
 
 @Injectable()
 export class NSFirebaseService {

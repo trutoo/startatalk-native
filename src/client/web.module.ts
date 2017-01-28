@@ -33,8 +33,8 @@ import { NameListEffects } from './app/shared/sample/index';
 import { StartatalkModule } from './app/shared/startatalk/startatalk.module';
 
 // web plugins
-const FirebasePlugin = require('firebase').firebase;
-const GoogleMapsPlugin = require('google-maps-loader').default;
+const FirebasePlugin = require('firebase');
+const GoogleMapsPlugin = require('google-maps-loader');
 
 // config
 import { Config, WindowService, ConsoleService } from './app/shared/core/index';
@@ -94,8 +94,8 @@ export function cons() {
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>' },
-    { provide: FirebaseToken, useValue: FirebasePlugin, },
-    { provide: GoogleMapsToken, useValue: GoogleMapsPlugin.getInstance(), },
+    { provide: FirebaseToken, useFactory: () => { return FirebasePlugin.firebase; } },
+    { provide: GoogleMapsToken, useFactory: () => { return GoogleMapsPlugin.default.getInstance(); } },
     { provide: FirebaseService, useClass: FirebaseService, },
     { provide: GoogleMapsService, useClass: GoogleMapsService, },
     { provide: SVGService, useClass: SVGService, },

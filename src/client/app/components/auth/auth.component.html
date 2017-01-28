@@ -6,6 +6,6 @@
   <legend class="label">Or</legend>
 </fieldset>
 
-<button class="facebook" (click)="facebookLogin()">Continue with Facebook</button>
+<button class="facebook" (click)="authenticate('facebook')">Continue with Facebook</button>
 <button class="twitter">Continue with Twitter</button>
-<button class="google">Continue with Google</button>
+<button class="google" (click)="authenticate('google')">Continue with Google</button>
