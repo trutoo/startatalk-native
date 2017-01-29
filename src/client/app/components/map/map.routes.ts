@@ -2,7 +2,7 @@ import { MapComponent } from './map.component';
 
 export const MapRoutes: Array<any> = [
   {
-    path: 'map',
+    path: '',
     component: MapComponent
   }
 ];

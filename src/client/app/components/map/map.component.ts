@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Config } from '../../shared/core/index';
 import { ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { GoogleMapsService } from '../../shared/startatalk/index';
-import { SVGService } from '../../shared/startatalk/index';
+import { GoogleMapsService, GeoLocationService, SVGService } from '../../shared/startatalk/index';
 
 @Component({
   moduleId: module.id,
@@ -18,17 +17,21 @@ export class MapComponent implements AfterViewInit {
     name: 'Erik Hughes',
   };
 
+  private map: any;
+
   constructor(
-    private googleMaps: GoogleMapsService,
+    private geoLocation: GeoLocationService,
+    private mapService: GoogleMapsService,
     private svgService: SVGService,
   ) {
   }
 
   ngAfterViewInit() {
-    this.googleMaps.create(this.mapView).then(($event) => {
+    this.mapService.create(this.mapView).then(($event) => {
       this.onMapReady($event);
     });
 
+    /*
     const shape = this.svgService.createInterests('marker-interest', [
       { color: '#69D2E7', weight: 40 },
       { color: '#A7DBD8', weight: 30 },
@@ -36,9 +39,17 @@ export class MapComponent implements AfterViewInit {
       { color: '#F38630', weight: 10 },
       { color: '#FA6900', weight: 8 },
     ]);
+    */
   }
 
   onMapReady($event) {
-    // Todo
+    this.map = $event.object;
+    this.geoLocation.position.subscribe(this.onNewPosition.bind(this));
+  }
+
+  onNewPosition(position) {
+    if (!position) return;
+    this.map.panTo(new this.mapService.googleMaps.LatLng(
+      position.coords.latitude, position.coords.longitude));
   }
 }

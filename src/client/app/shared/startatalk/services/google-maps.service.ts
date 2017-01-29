@@ -5,7 +5,7 @@ import { MapConfig } from '../utils/index';
 @Injectable()
 export class GoogleMapsService {
 
-  private googleMaps: any;
+  public googleMaps: any;
 
   constructor(
     @Inject(GoogleMapsToken) private googleMapsToken: any,
@@ -21,7 +21,7 @@ export class GoogleMapsService {
         this.googleMaps = google.maps;
         const map = new this.googleMaps.Map(mapView.nativeElement, {
           center: { lat: 59.334591, lng: 18.063240 },
-          zoom: 17,
+          zoom: 15,
           styles: MapConfig.GOOGLE_MAPS_STYLE,
         });
         // Match nativescript event

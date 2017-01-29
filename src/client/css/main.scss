@@ -1,6 +1,10 @@
 @import '../scss/variables';
 
 /* Reset */
+html {
+  height: 100%;
+}
+
 html,
 body,
 div {
@@ -20,6 +24,27 @@ body {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  &.loading {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    background-color: #4D3854;
+    sd-app {
+      width: 100%;
+    }
+    img {
+        display: block;
+        margin: auto;
+        width: 40%;
+        max-height: 256px;
+    }
+    p {
+      text-align: center;
+      color: white;
+      font-size: 20px;
+    }
+  }
 }
 
 p {

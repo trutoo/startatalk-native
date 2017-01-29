@@ -19,6 +19,8 @@ import {
   AppService
 } from './app/shared/core/index';
 import {
+  GeoLocationToken,
+  GeoLocationService,
   FirebaseToken,
   FirebaseService,
   GoogleMapsToken,
@@ -39,12 +41,14 @@ import { ComponentsModule, cons } from './components.module';
 import {
   WindowNative,
   NSAppService,
+  NSGeoLocationService,
   NSFirebaseService,
   NSGoogleMapsService
 } from './mobile/core/index';
 import { NS_ANALYTICS_PROVIDERS } from './mobile/analytics/index';
 
 // nativescript plugins
+const GeoLocationPlugin = require('nativescript-geolocation');
 const FirebasePlugin = require('nativescript-plugin-firebase');
 const GoogleMapsPlugin = require('nativescript-google-maps-sdk');
 
@@ -85,9 +89,11 @@ MultilingualService.SUPPORTED_LANGUAGES = AppConfig.SUPPORTED_LANGUAGES;
     NS_ANALYTICS_PROVIDERS,
     { provide: RouterExtensions, useClass: TNSRouterExtensions },
     { provide: AppService, useClass: NSAppService },
+    { provide: GeoLocationToken, useFactory: () => { return GeoLocationPlugin; } },
+    { provide: GeoLocationService, useClass: NSGeoLocationService },
     { provide: FirebaseToken, useFactory: () => { return FirebasePlugin; } },
-    { provide: GoogleMapsToken, useFactory: () => { return GoogleMapsPlugin; } },
     { provide: FirebaseService, useClass: NSFirebaseService },
+    { provide: GoogleMapsToken, useFactory: () => { return GoogleMapsPlugin; } },
     { provide: GoogleMapsService, useClass: NSGoogleMapsService },
     { provide: SVGService, useClass: SVGService },
   ],

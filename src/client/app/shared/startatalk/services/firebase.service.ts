@@ -6,6 +6,7 @@ import { FirebaseConfig } from '../utils/index';
 export class FirebaseService {
 
   private database: any;
+  private user: any;
 
   constructor(
     @Inject(FirebaseToken) private firebase: any,
@@ -17,20 +18,28 @@ export class FirebaseService {
       storageBucket: FirebaseConfig.FIREBASE_STORAGE_BUCKET,
       messagingSenderId: FirebaseConfig.FIREBASE_MESSAGING_SENDER_ID,
     });
+
     this.database = this.firebase.database();
+    this.firebase.auth().getRedirectResult().then(this.success).catch(this.error);
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        this.user = user;
+      } else {
+        this.user = {};
+      }
+    });
   }
 
   facebookAuth() {
     const provider = new this.firebase.auth.FacebookAuthProvider();
     provider.addScope('email');
     this.firebase.auth().signInWithRedirect(provider);
-    this.firebase.auth().getRedirectResult().then(this.success).catch(this.error);
   }
 
   googleAuth() {
     const provider = new this.firebase.auth.GoogleAuthProvider();
     this.firebase.auth().signInWithRedirect(provider);
-    this.firebase.auth().getRedirectResult().then(this.success).catch(this.error);
   }
 
   success(result) {

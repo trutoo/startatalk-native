@@ -11,7 +11,8 @@ import { StoreModule } from '@ngrx/store';
 // app
 import { t } from '../shared/test/index';
 import { TEST_CORE_PROVIDERS, TEST_HTTP_PROVIDERS } from '../shared/core/testing/index';
-import { NameListService, NavbarComponent, ToolbarComponent } from '../shared/sample/index';
+import { NameListService, NavbarComponent } from '../shared/sample/index';
+import { ActionBarComponent } from '../shared/startatalk/index';
 import { MultilingualModule } from '../shared/i18n/multilingual.module';
 import { reducer } from '../shared/i18n/index';
 
@@ -20,9 +21,9 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 
-const config:Route[] = [
-  {path: '', component: HomeComponent},
-  {path: 'about', component: AboutComponent}
+const config: Route[] = [
+  { path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent }
 ];
 
 // test module configuration for each test
@@ -31,13 +32,13 @@ const testModuleConfig = () => {
     imports: [
       FormsModule,
       MultilingualModule,
-      StoreModule.provideStore({ }),
+      StoreModule.provideStore({}),
       RouterTestingModule.withRoutes(config)
     ],
     declarations: [
       TestComponent, AppComponent,
       HomeComponent, AboutComponent,
-      NavbarComponent, ToolbarComponent
+      NavbarComponent, ActionBarComponent
     ],
     providers: [
       TEST_CORE_PROVIDERS(),
@@ -68,4 +69,4 @@ export function main() {
   selector: 'test-cmp',
   template: '<sd-app></sd-app>'
 })
-class TestComponent {}
+class TestComponent { }

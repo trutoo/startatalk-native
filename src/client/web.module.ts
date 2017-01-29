@@ -15,6 +15,8 @@ import { TranslateLoader } from 'ng2-translate';
 import { APP_COMPONENTS, AppComponent } from './app/components/index';
 import { routes } from './app/components/app.routes';
 import {
+  GeoLocationToken,
+  GeoLocationService,
   FirebaseToken,
   FirebaseService,
   GoogleMapsToken,
@@ -94,9 +96,11 @@ export function cons() {
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '<%= APP_BASE %>' },
+    { provide: GeoLocationToken, useFactory: () => { return navigator.geolocation; } },
+    { provide: GeoLocationService, useClass: GeoLocationService, },
     { provide: FirebaseToken, useFactory: () => { return FirebasePlugin.firebase; } },
-    { provide: GoogleMapsToken, useFactory: () => { return GoogleMapsPlugin.default.getInstance(); } },
     { provide: FirebaseService, useClass: FirebaseService, },
+    { provide: GoogleMapsToken, useFactory: () => { return GoogleMapsPlugin.default.getInstance(); } },
     { provide: GoogleMapsService, useClass: GoogleMapsService, },
     { provide: SVGService, useClass: SVGService, },
   ],

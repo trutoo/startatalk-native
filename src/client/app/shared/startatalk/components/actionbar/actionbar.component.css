@@ -1,18 +1,27 @@
 :host {
-  background-color: #106cc8;
-  color: rgba(255, 255, 255, 0.87);
-  display: block;
-  height: 48px;
-  padding: 0 16px;
   position: relative;
+  display: block;
+  padding: 0 16px;
+  height: 48px;
+  color: rgba(0, 0, 0, 0.87);
+  box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+  background-color: #f0f0f0;
+}
+
+img {
+  height: 32px;
+  border-radius: 50%;
+  vertical-align: middle;
 }
 
 h1 {
-  display: inline;
+  display: inline-block;
+  margin: 0 0 0 5px;
+  line-height: 48px;
   font-size: 20px;
   font-weight: normal;
   letter-spacing: 0.1px;
-  line-height: 48px;
+  vertical-align: middle;
 }
 
 :host lang-switcher,

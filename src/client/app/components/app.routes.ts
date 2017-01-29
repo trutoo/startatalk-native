@@ -5,8 +5,8 @@ import { MapRoutes } from './map/map.routes';
 import { AuthRoutes } from './auth/auth.routes';
 
 export const routes: Array<any> = [
+  ...MapRoutes,
   ...HomeRoutes,
   ...AboutRoutes,
-  ...MapRoutes,
   ...AuthRoutes,
 ];
