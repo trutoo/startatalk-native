@@ -10,3 +10,41 @@
   width: 128px;
   height: 128px;
 }
+
+#geo-location {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  line-height: 12px;
+  font-size: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  background: #099;
+  border-radius: 50%;
+}
+
+#geo-location::after {
+  position: absolute;
+  content: '';
+  top: 50%;
+  left: 50%;
+  margin: -32px;
+  width: 64px;
+  height: 64px;
+  border: 2px solid rgba(0, 128, 64, 1);
+  opacity: 0.1;
+  border-radius: 50%;
+  animation: pulse 4s linear infinite;
+  box-sizing: border-box;
+}
+
+@keyframes pulse {
+    0% {transform: scale(0); opacity: 0;}
+    4% {transform: scale(0); opacity: 0;}
+    8% {transform: scale(0.1); opacity: 1;}
+    16% {transform: scale(0.5); opacity: 1;}
+    50% {transform: scale(1); opacity: 0; }
+    100% {transform: scale(1); opacity: 0; }
+}
