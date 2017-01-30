@@ -49,7 +49,6 @@ export class MapComponent implements AfterViewInit {
 
   onNewPosition(position) {
     if (!position) return;
-    console.log(position);
     this.map.panTo(new this.mapService.googleMaps.LatLng(
       position.coords.latitude, position.coords.longitude));
   }

@@ -25,7 +25,7 @@
   border-radius: 50%;
 }
 
-#geo-location::after {
+#geo-location.active::after {
   position: absolute;
   content: '';
   top: 50%;
